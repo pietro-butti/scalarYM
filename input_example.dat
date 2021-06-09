@@ -1,0 +1,13 @@
+# Example of input file: 3 dimensions nc=2
+
+
+6.0        # beta                             (coupling)
+8          # nt                               (L_0)       
+8          # nx                               (L_1)       
+8          # ny                               (L_2)       
+0          # mode                             (0--->thermalize() is called, 1--->read_last_conf())      
+200        # thermalization_time            
+100        # reunitarization_period         
+200        # how_many_measurements       
+1          # updates_between_measurements   
+0          # type_of_start                    (starting configurations 0--->hot, 1--->cold, 2--->old (*) )              
