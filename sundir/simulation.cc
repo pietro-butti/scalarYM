@@ -7,7 +7,8 @@ void simulation(int mode) {
   else {
     read_last_conf();
   }
-
+	
+  update(0);
   /*
   measurements();
   */
