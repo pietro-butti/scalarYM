@@ -12,7 +12,7 @@ const int Ncolsquare=Ncol*Ncol;
 
 // #define __debugging_mode__
 // #define __parallel__
-#define __wanna_save_last_conf__
+// #define __wanna_save_last_conf__
 // #define __wanna_improvement__
 // #define __wanna_tadpole__
 // #define __wanna_multilevel__
