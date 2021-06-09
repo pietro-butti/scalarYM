@@ -35,8 +35,7 @@ CC=g++
 
 MAIN=sun.cc
 
-SOURCE_FILES= $(MAIN) \
-	check_unitarity.cc \
+SOURCE_FILES= check_unitarity.cc \
 	compute_action.cc \
 	compute_action_from_first_boundary.cc \
 	compute_action_from_second_boundary.cc \
