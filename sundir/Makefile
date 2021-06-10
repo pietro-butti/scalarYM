@@ -75,7 +75,8 @@ SOURCE_FILES= check_unitarity.cc \
 	time_to_stop.cc \
 	update.cc \
 	update_first_boundary.cc \
-	update_second_boundary.cc
+	update_second_boundary.cc \
+	metropolis_scalarym.cc
 
 HEADER_FILES=headers.h \
 	more_headers.h \
@@ -134,6 +135,10 @@ scalar : $(scalar_sim_files) \
 	$(HEADER_FILES) \
 	Makefile 
 	$(CC) $(scalar_main) $(FFLAGS) $(INCLUDE) $(LIB) -o $@
+
+
+
+
 
 
 

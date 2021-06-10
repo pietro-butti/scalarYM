@@ -1,5 +1,6 @@
 void update(bool locked_mode) {
 
+/*
 #ifdef __wanna_trace_deformation__
   for (unsigned short int metro_counter=0; metro_counter<how_many_metro; metro_counter++) {  
     metropolis(locked_mode);
@@ -14,6 +15,9 @@ void update(bool locked_mode) {
     }
   }
 #endif
+*/
 
+
+	// METROPOLIS UPDATE. Look into metropolis_scalarym.cc
 
 }

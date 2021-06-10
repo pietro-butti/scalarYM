@@ -149,3 +149,6 @@
 #include "deallocate_arrays.cc"
 
 
+
+// NUOVE ROUTINES
+#include "metropolis_scalarym.cc"
