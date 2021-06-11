@@ -1,3 +1,3 @@
 cd sundir
 make clean
-make scalar
+make debug

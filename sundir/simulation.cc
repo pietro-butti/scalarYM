@@ -2,16 +2,6 @@ void simulation() {
 
   initialize();
 
-  dc *proposal = new dc[ufielddimension];
-  for(int ii=0; ii<ufielddimension; ii++) proposal[ii] = ufield[ii];
-
-
-
-  Metropolis_for_one_link(2,1,.05, proposal);
-
-
-
-
 
 	
 

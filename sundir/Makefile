@@ -136,6 +136,11 @@ scalar : $(scalar_sim_files) \
 	Makefile 
 	$(CC) $(scalar_main) $(FFLAGS) $(INCLUDE) $(LIB) -o $@
 
+debug_main = main_debug.cc
+debug_files = $(debug_main) $(SOURCE_FILES)
+debug: $(debug_files) $(HEADER_FILES) Makefile
+	$(CC) $(debug_main) $(FFLAGS) $(INCLUDE) $(LIB) -o $@
+
 
 
 
@@ -152,6 +157,7 @@ scalar : $(scalar_sim_files) \
 clean:
 	rm -f $(EXECUTABLE)
 	rm -f scalar
+	rm -f debug
 
 # To run:
 #
