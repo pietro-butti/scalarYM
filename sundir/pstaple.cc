@@ -1,4 +1,4 @@
-void pstaple(dc *stot, int site, int mu, int first_direction, int use_smeared) {
+  void pstaple(dc *stot, int site, int mu, int first_direction, int use_smeared) {
 
 // Computes the staples from (site) to (site+a mu) in the positive 
 // directions (starting from first_direction) and stores their sum into stot.

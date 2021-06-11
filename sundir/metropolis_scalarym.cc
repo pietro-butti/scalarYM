@@ -37,7 +37,8 @@ double Metropolis_for_one_link(int dir, int site, double tuner, dc* ufield_new) 
 	mult_C_equals_AB_for_SU2(Unew,X,Uold);
 
 
-	// Calculate
+	// Calculate delta S
+	double deltaS = 0.0
 
 	/*
 	// Calculate deltaS = beta/2N*tr[ (X-1)*(U(mu,n) + sum_(other i) U(mu,n+i)) ]
@@ -62,7 +63,7 @@ double Metropolis_for_one_link(int dir, int site, double tuner, dc* ufield_new) 
 	return deltaS;
 }
 
-
+/*
 // This performs a sweep (== update every link variable once) and then perform metropolis
 bool Metropolis(double tuner) {
 
@@ -88,3 +89,4 @@ bool Metropolis(double tuner) {
 	else return false; //reject
 
 }
+*/
