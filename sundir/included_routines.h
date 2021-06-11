@@ -140,6 +140,9 @@
   #include "reunitarize.cc"
 #endif
 
+
+#include "metropolis_scalarym.cc"  //nuovo
+
 #include "time_to_stop.cc"
 #include "save_last_conf.cc"
 #include "terminate_run.cc"
@@ -149,6 +152,3 @@
 #include "deallocate_arrays.cc"
 
 
-
-// NUOVE ROUTINES
-#include "metropolis_scalarym.cc"
