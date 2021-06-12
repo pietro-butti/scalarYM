@@ -39,10 +39,19 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 
 	for(int nu=0; nu<dim; nu++) {
 		if(nu!=dir) {
+<<<<<<< HEAD
 			// pstaple(bin1,site,dir,nu,0);
 			// nstaple(bin1,site,dir,nu,0);
 			// for(int i=0; i<4; i++) staplesum[i] += bin1[i];
 
+=======
+			/*
+			pstaple(bin1,site,dir,nu,0);
+			nstaple(bin1,site,dir,nu,0);
+			for(int i=0; i<4; i++) staplesum[i] += bin1[i];
+			*/
+		
+>>>>>>> origin/alessandro
 			// Calculate UPPER staple
 			dc up[4], left[4], down[4];
 
@@ -70,6 +79,10 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 
 
 			for(int i=0; i<4; i++) staplesum[i] += bin2[i] + bin3[i];
+<<<<<<< HEAD
+=======
+		
+>>>>>>> origin/alessandro
 		}
 	}
 
