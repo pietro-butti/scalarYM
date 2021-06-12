@@ -40,6 +40,10 @@ double get_wilson_action(){
         mult_C_equals_ABdagger_for_SU2(aux2, aux1, c);
         mult_C_equals_ABdagger_for_SU2(aux1, aux2, d);
 
+<<<<<<< HEAD:sundir/scalarym_getlattice.cc
+=======
+        //for(int i=0; i<4; i++) cout << aux1[i]<<endl;       
+>>>>>>> origin/alessandro:sundir/getlattice_scalarym.cc
         //action += 1. - 1./2. * real(aux1[0] + aux1[3]); 
         action += real(aux1[0] + aux1[3]);
     }

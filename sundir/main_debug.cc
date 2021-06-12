@@ -87,7 +87,10 @@ int main(int argc, char **argv) {
   //get_plaq_index(5, 2,1);
   cout << get_wilson_action() << endl;
   cout << plaquette() << endl;
+<<<<<<< HEAD
   //cout << plaquette() << endl;
+=======
+>>>>>>> origin/alessandro
 
 
 
