@@ -76,7 +76,8 @@ SOURCE_FILES= check_unitarity.cc \
 	update.cc \
 	update_first_boundary.cc \
 	update_second_boundary.cc \
-	metropolis_scalarym.cc
+	metropolis_scalarym.cc  \
+	getlattice_scalarym.cc
 
 HEADER_FILES=headers.h \
 	more_headers.h \

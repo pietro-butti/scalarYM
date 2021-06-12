@@ -142,6 +142,7 @@
 
 
 #include "metropolis_scalarym.cc"  //nuovo
+#include "getlattice_scalarym.cc"  //nuovo
 
 #include "time_to_stop.cc"
 #include "save_last_conf.cc"

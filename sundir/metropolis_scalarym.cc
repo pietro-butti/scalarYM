@@ -32,12 +32,12 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 
 	for(int nu=0; nu<dim; nu++) {
 		if(nu!=dir) {
-			
+			/*
 			pstaple(bin1,site,dir,nu,0);
 			nstaple(bin1,site,dir,nu,0);
 			for(int i=0; i<4; i++) staplesum[i] += bin1[i];
-
-		/*
+			*/
+		
 			// Calculate UPPER staple
 			dc up[4], left[4], down[4];
 
@@ -52,10 +52,6 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 			mult_C_equals_ABdagger_for_SU2(bin2,bin1,down);
 
 
-<<<<<<< HEAD
-	// Calculate delta S
-	double deltaS = 0.0
-=======
 			// Calculate UPPER staple
 			int n_minus_nu = neighbor_minus[nu*nsites+site];
 			int n_minus_nu_plus_mu = neighbor_plus[dir*nsites+n_minus_nu];
@@ -63,14 +59,13 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 			for(int i=0; i<4; i++) down[i] = ufield[(nu*nsites+n_minus_nu_plus_mu)*Ncolsquare+i];  // U_nu(n+mu-nu)
 			for(int i=0; i<4; i++) left[i] = ufield[(dir*nsites+n_minus_nu)*Ncolsquare+i];          // U_mu(n-nu)
 			for(int i=0; i<4; i++) up[i]   = ufield[(nu*nsites+n_minus_nu)*Ncolsquare+i];          // U_nu(n-mu)
->>>>>>> origin/pietro
 
 			mult_C_equals_AdaggerB_for_SU2(bin1,left,up);
 			mult_C_equals_AdaggerB_for_SU2(bin3,down,bin1);
 
 
-			for(int i=0; i<4; i++) staplesum[i] += bin1[i] + bin3[i];
-		*/
+			for(int i=0; i<4; i++) staplesum[i] += bin2[i] + bin3[i];
+		
 		}
 	}
 
@@ -86,7 +81,7 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 	return deltaS;
 }
 
-/*
+
 // This performs a sweep (== update every link variable once) and then perform metropolis
 bool Metropolis_sweep_gauge(double tuner) {
 	// Create a bin and fill with gauge variables
@@ -115,4 +110,3 @@ bool Metropolis_sweep_gauge(double tuner) {
 	else return false; //reject
 
 }
-*/
