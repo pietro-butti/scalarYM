@@ -1,5 +1,11 @@
 	//true--->accept, false---reject
 bool boltzmann_coin_flip(double deltaS) { 
+	double coin = xx.rand();
+	double probability = min(1.,exp(-deltaS));
+
+	if (coin<probability) return true;
+	else return false;
+	/*
 	if (deltaS<0) return true;
 	else{
 		double coin = xx.rand();
@@ -7,6 +13,7 @@ bool boltzmann_coin_flip(double deltaS) {
 		if (coin<exp(-deltaS)) return true;
 		else return false;
 	}
+	*/
 }
 
 
@@ -32,12 +39,10 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 
 	for(int nu=0; nu<dim; nu++) {
 		if(nu!=dir) {
-			
-			pstaple(bin1,site,dir,nu,0);
-			nstaple(bin1,site,dir,nu,0);
-			for(int i=0; i<4; i++) staplesum[i] += bin1[i];
+			// pstaple(bin1,site,dir,nu,0);
+			// nstaple(bin1,site,dir,nu,0);
+			// for(int i=0; i<4; i++) staplesum[i] += bin1[i];
 
-		/*
 			// Calculate UPPER staple
 			dc up[4], left[4], down[4];
 
@@ -46,7 +51,7 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 			
 			for(int i=0; i<4; i++) up[i]   = ufield[(nu*nsites+n_plus_mu)*Ncolsquare+i];  // U_nu(n+mu)
 			for(int i=0; i<4; i++) left[i] = ufield[(dir*nsites+n_plus_nu)*Ncolsquare+i];  // U_mu(n+nu)
-			for(int i=0; i<4; i++) down[i] = ufield[(nu*nsites+site)*Ncolsquare+i];       // U_nu(n+mu)
+			for(int i=0; i<4; i++) down[i] = ufield[(nu*nsites+site)*Ncolsquare+i];       // U_nu(n)
 
 			mult_C_equals_ABdagger_for_SU2(bin1,up,left);
 			mult_C_equals_ABdagger_for_SU2(bin2,bin1,down);
@@ -64,8 +69,7 @@ double Metropolis_for_one_link(int site, int dir, double tuner, dc* ufield_new) 
 			mult_C_equals_AdaggerB_for_SU2(bin3,down,bin1);
 
 
-			for(int i=0; i<4; i++) staplesum[i] += bin1[i] + bin3[i];
-		*/
+			for(int i=0; i<4; i++) staplesum[i] += bin2[i] + bin3[i];
 		}
 	}
 

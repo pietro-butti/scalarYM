@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     reunitarization_period = 5;            
     how_many_measurements = 100;
     updates_between_measurements = 1;
-    type_of_start = 1;
+    type_of_start = 0;
 
     // derived variables
     nsites=nt*nx*ny;
@@ -79,14 +79,28 @@ int main(int argc, char **argv) {
   int Nsweep = 1000;
   int counter = 0;
   for(int tt=0; tt<Nsweep; tt++) {    
-    if (Metropolis_sweep_gauge(.01)==true) counter++;
+    if (Metropolis_sweep_gauge(.005)==true) counter++;
+    
+
+    // for (unsigned short int hb_counter=0;hb_counter<how_many_hb;hb_counter++) {  
+    //     heat_bath(0);
+    // // gauge_transform();
+    //     for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) { 
+    //     overrelaxation(0);
+    // // gauge_transform();
+    //     }
+    // }
+
+
+    if (tt%reunitarization_period==0) reunitarize();
+    
     out << plaquette() << endl;
     cout << plaquette() << endl;
   }
 
   out.close();
 
-  cout << float(counter)/float(Nsweep) << endl;
+  cout << "acceptance rate: " << int(100*float(counter)/float(Nsweep)) << " %" << endl;
 
 
 
