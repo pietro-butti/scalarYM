@@ -70,14 +70,7 @@ int main(int argc, char **argv) {
 // ================================================================================ //
 
   initialize();
-<<<<<<< HEAD
-=======
-  int dim_mom_comp = (Ncolsquare-1)*nsites*dim;
-  double* mom_comp = new double[dim_mom_comp];  
-  cout << dim_mom_comp << endl;
-  refresh_mom( mom_comp);
-  
->>>>>>> origin/alessandro
+
 
   /*
   for(int mu=0;  mu<dim ; mu++)
@@ -91,24 +84,13 @@ int main(int argc, char **argv) {
       cout << t << " "<< x <<" "<< y << " " << mu << " "<< get_site(t,x,y) <<  " " << get_link(get_site(t,x,y), mu) << endl;
   }
 
-<<<<<<< HEAD
-  //get_plaq_index(5, 2,1);
-  // cout << get_wilson_action() << endl;
-  // cout << plaquette() << endl;
-  // cout << plaquette() << "   "  << 2.*get_wilson_action() << "  " << " " << plaquette() << endl;
-
-  */
-
-
-=======
 
   // testing get_wilson_action() and comparisone with plaquette()
-  /*
+
   cout << get_wilson_action() << endl;
   cout << beta * nsites*6 *(1- plaquette()) << endl;
   cout << plaquette() << endl;
 */
->>>>>>> origin/alessandro
 
   ofstream out;
   out.open("prova.dat");
@@ -136,13 +118,7 @@ int main(int argc, char **argv) {
   cout << "acceptance rate: " << int(100*float(counter)/float(Nsweep)) << " %" << endl;
 
 
-
-<<<<<<< HEAD
-  deallocate_arrays();
-=======
-  */
     deallocate_arrays();
->>>>>>> origin/alessandro
 
 
 

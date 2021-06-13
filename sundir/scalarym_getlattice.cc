@@ -72,11 +72,6 @@ double get_plaquette(){
 
         S += 1./double(Ncol*nsites*dim*(dim-1))*real(bin1[0]+bin1[3]);        
     }
-<<<<<<< HEAD
-
-    return S;
-=======
     
-    return  2 * action/double((Ncol*dim*(dim-1.)*nsites));
->>>>>>> origin/alessandro
+    return  S;
 }
