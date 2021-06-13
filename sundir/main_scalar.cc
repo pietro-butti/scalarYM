@@ -229,8 +229,13 @@ int main(int argc, char **argv) {
   output_stream << "###############################################" << endl;
   */
 
+<<<<<<< HEAD
+
+  simulation(mode);
+=======
 	
   //simulation(mode);
+>>>>>>> origin/pietro
 
 
 

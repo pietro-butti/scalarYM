@@ -70,6 +70,7 @@ int main(int argc, char **argv) {
 // ================================================================================ //
 
   initialize();
+<<<<<<< HEAD
   
   double* force = new double[nsites*dim*3];
   compute_forces(force);
@@ -94,33 +95,41 @@ int main(int argc, char **argv) {
   //cout << get_wilson_action() << endl;
   //cout << beta * nsites*6 *(1- plaquette()) << endl;
   //cout << plaquette() << endl;
+=======
 
-/*
+
+
+>>>>>>> origin/master
+
   ofstream out;
-  out.open("prova.dat");
-  int Nsweep = 10000;
+  out.open("../prova.dat");
+  int Nsweep = 10;
 
   // int counter = 0;
   for(int tt=0; tt<Nsweep; tt++) {    
+    out << get_plaquette() << endl;
+    cout << tt << " " << get_plaquette() << endl;
+
+
     // if (Metropolis_sweep_gauge(0.01)==true) counter++;
 
 
-        // for (unsigned short int hb_counter=0;hb_counter<how_many_hb;hb_counter++) { 
-        //   heat_bath(0);
-        //   for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) overrelaxation(0);
-        // }
+    // for (unsigned short int hb_counter=0;hb_counter<how_many_hb;hb_counter++) { 
+    //   heat_bath(0);
+    //   for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) overrelaxation(0);
+    // }
 
+    if (jump_HMC(.05,2.)==true) counter++;
 
-    if (tt%reunitarization_period==0) reunitarize();
-    out << plaquette() << endl;
-    cout << tt << " " << plaquette() << endl;
-    }
-    
-
-
+    if (tt%reunitarization_period==0) reunitarize();  
+  }
   out.close();
   cout << "acceptance rate: " << int(100*float(counter)/float(Nsweep)) << " %" << endl;
-*/
+
+
+
+
+
 
     deallocate_arrays();
 
