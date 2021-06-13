@@ -140,6 +140,12 @@
   #include "reunitarize.cc"
 #endif
 
+
+#include "scalarym_metropolis.cc"  //nuovo
+#include "scalarym_getlattice.cc"  //nuovo
+#include "scalarym_hmc.cc"  //nuovo
+
+
 #include "time_to_stop.cc"
 #include "save_last_conf.cc"
 #include "terminate_run.cc"

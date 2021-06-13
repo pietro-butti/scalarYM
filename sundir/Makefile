@@ -75,7 +75,10 @@ SOURCE_FILES= check_unitarity.cc \
 	time_to_stop.cc \
 	update.cc \
 	update_first_boundary.cc \
-	update_second_boundary.cc
+	update_second_boundary.cc \
+	scalarym_metropolis.cc  \
+	scalarym_getlattice.cc \
+	scalarym_hmc.cc
 
 HEADER_FILES=headers.h \
 	more_headers.h \
@@ -135,6 +138,15 @@ scalar : $(scalar_sim_files) \
 	Makefile 
 	$(CC) $(scalar_main) $(FFLAGS) $(INCLUDE) $(LIB) -o $@
 
+debug_main = main_debug.cc
+debug_files = $(debug_main) $(SOURCE_FILES)
+debug: $(debug_files) $(HEADER_FILES) Makefile
+	$(CC) $(debug_main) $(FFLAGS) $(INCLUDE) $(LIB) -o $@
+
+
+
+
+
 
 
 # EXECUTABLE=run.x
@@ -147,6 +159,7 @@ scalar : $(scalar_sim_files) \
 clean:
 	rm -f $(EXECUTABLE)
 	rm -f scalar
+	rm -f debug
 
 # To run:
 #

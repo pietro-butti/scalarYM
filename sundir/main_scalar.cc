@@ -216,10 +216,7 @@ int main(int argc, char **argv) {
 // ================================================================================ //
 
 
-
-
-
-  
+  /*
   if (measfile.is_open()) {
     measfile >> measurements_already_done;
     output_stream << "# " << measurements_already_done << " measurements already done in this thread" << endl;
@@ -230,9 +227,15 @@ int main(int argc, char **argv) {
   measfile.close();
 
   output_stream << "###############################################" << endl;
+  */
 
+<<<<<<< HEAD
 
   simulation(mode);
+=======
+	
+  //simulation(mode);
+>>>>>>> origin/pietro
 
 
 
@@ -241,6 +244,16 @@ int main(int argc, char **argv) {
   MPI::Finalize();
 #endif
 */
+
+
+
+  simulation();
+
+
+
+
+
+
 
 
   deallocate_arrays();
