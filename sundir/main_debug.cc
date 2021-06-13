@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     reunitarization_period = 5;            
     how_many_measurements = 100;
     updates_between_measurements = 1;
-    type_of_start = 1;
+    type_of_start = 0;
 
     // derived variables
     nsites=nt*nx*ny;
@@ -71,11 +71,10 @@ int main(int argc, char **argv) {
 // ================================================================================ //
 
   initialize();
-  int dim_mom_comp = (Ncolsquare-1)*nsites*dim;
-  double* mom_comp = new double[dim_mom_comp];  
-  cout << dim_mom_comp << endl;
-  refresh_mom( mom_comp);
-  
+
+  double* force = new double[nsites*dim*3];
+  compute_forces(force);
+  for(int i=0; i<nsites*dim*3; i++) cout << force[i] << endl;
 
   /*
   for(int mu=0;  mu<dim ; mu++)

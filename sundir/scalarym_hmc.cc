@@ -1,23 +1,7 @@
 
- /*  
-    dc *sigma1 = new dc[4];
-    sigma1[1] = dc(0.,0.);
-    sigma1[2] = dc(1.,0.);
-    sigma1[3] = dc(1.,0.);
-    sigma1[4] = dc(0.,0.);
+ 
+
     
-    dc *sigma2 = new dc[4];
-    sigma2[1] = dc(0.,0.);
-    sigma2[2] = dc(0.,-1.);
-    sigma2[3] = dc(0.,1.);
-    sigma2[4] = dc(0.,0.);
-    
-    dc *sigma3 = new dc[4];
-    sigma3[1] = dc(1.,0.);
-    sigma3[2] = dc(0.,0.);
-    sigma3[3] = dc(0.,0.);
-    sigma3[4] = dc(-1.,0.);
-    */
 
 
 
@@ -30,7 +14,42 @@ void refresh_mom(double * mom_comp ){
     }
 }
 
-void 
+//double* force_comp = new double[];
+
+void compute_forces( double* force_comp){
+    
+    dc aux_pauli[Ncolsquare], aux1[Ncolsquare], U[Ncolsquare], staplesum[Ncolsquare],  aux_staple[Ncolsquare];
+    //Initialize bins
+    
+    for(int n=0; n<nsites; n++)
+    for(int mu=0; mu<dim; mu++)
+    for(int a=0; a<(Ncolsquare-1); a++){
+
+        // set staplesum to zero
+        for(int i=0; i<Ncolsquare; i++) staplesum[i] = dc(0.,0.);
+        
+        // get sum staple
+        for(int nu=0; nu<dim; nu++){
+            if(nu!=mu){
+                pstaple(aux_staple, n, mu, nu, 0);
+			    nstaple(aux_staple, n, mu, nu, 0);
+			    for(int i=0; i<Ncolsquare; i++) staplesum[i] += aux_staple[i];
+            }
+        }
+
+        // get pauli and gauge fields of interest
+        for(int i=0; i<Ncolsquare; i++) aux_pauli[i] = pauli[a*Ncolsquare + i]; 
+        for(int i=0; i<Ncolsquare; i++) U[i] = ufield[(mu*nsites+n)*Ncolsquare +i]; 
+
+        // multiply pauli*gauge*sumstaple
+        mult_C_equals_AB_for_SU2(aux1, aux_pauli, U); 
+        mult_C_equals_AB_for_SU2(aux_staple, aux1, staplesum); 
+        
+        force_comp[(mu*nsites + n)*(Ncolsquare-1)+a] = beta / float(Ncol) * imag(aux_staple[0] + aux_staple[3]);
+
+    }
+
+}
 
 /*
 void 
