@@ -26,7 +26,8 @@ double get_wilson_action(){
     double action = 0.;    
     for(int site=0; site<nsites; site++)
     for(int nu=0; nu<dim; nu++)
-    for(int mu=0; mu<nu; mu++){
+    for(int mu=0; mu<nu; mu++)if(mu!=nu){
+
         int* plaq_index = new int[4];
         get_plaq_index(site, mu, nu, plaq_index);
         
@@ -44,10 +45,10 @@ double get_wilson_action(){
         mult_C_equals_ABdagger_for_SU2(aux1, aux2, d);
 
         //for(int i=0; i<4; i++) cout << aux1[i]<<endl;       
-        //action += 1. - 1./2. * real(aux1[0] + aux1[3]); 
-        action += 1./double(Ncol*nsites*dim*(dim-1))*real(aux1[0] + aux1[3]);
+        action += 1. - 1./2. * real(aux1[0] + aux1[3]); 
+        // action += 1./double(Ncol*nsites*dim*(dim-1))*real(aux1[0] + aux1[3]);
     }
-    return action;
+    return action*beta;
 }
 
 
