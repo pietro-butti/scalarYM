@@ -21,9 +21,8 @@ double get_wilson_action(){
 
     double action = 0.;
     for(int site=0; site<nsites; site++)
-    for(int nu=0; nu<4; nu++)
+    for(int nu=0; nu<dim; nu++)
     for(int mu=0; mu<nu; mu++){
-        
         int* plaq_index = new int[4];
         get_plaq_index(site, mu, nu, plaq_index);
         
@@ -40,12 +39,35 @@ double get_wilson_action(){
         mult_C_equals_ABdagger_for_SU2(aux2, aux1, c);
         mult_C_equals_ABdagger_for_SU2(aux1, aux2, d);
 
-<<<<<<< HEAD:sundir/scalarym_getlattice.cc
-=======
         //for(int i=0; i<4; i++) cout << aux1[i]<<endl;       
->>>>>>> origin/alessandro:sundir/getlattice_scalarym.cc
         //action += 1. - 1./2. * real(aux1[0] + aux1[3]); 
-        action += real(aux1[0] + aux1[3]);
+        action += 1./double(Ncol*nsites*dim*(dim-1))*real(aux1[0] + aux1[3]);
     }
-    return action/(nsites*6.);
+    return action;
+}
+
+
+double get_plaquette(){
+
+    dc bin1[4], bin2[4];
+    double S = 0.;
+
+    for(int site=0; site<nsites; site++)
+    for(int nu=0; nu<dim; nu++)
+    for(int mu=0; mu<nu; mu++) {
+        
+        dc right[4]; dc up[4]; dc left[4]; dc down[4];
+        for(int i=0; i<Ncolsquare; i++) right[i] = ufield[(mu*nsites+site)*Ncolsquare+i];
+        for(int i=0; i<Ncolsquare; i++) up[i]    = ufield[(nu*nsites+neighbor_plus[mu*nsites+site])*Ncolsquare+i];
+        for(int i=0; i<Ncolsquare; i++) left[i]  = ufield[(mu*nsites+neighbor_minus[nu*nsites+site])*Ncolsquare+i];
+        for(int i=0; i<Ncolsquare; i++) down[i]  = ufield[(nu*nsites+site)*Ncolsquare+i];
+
+        mult_C_equals_AB_for_SU2(bin1,right,up);
+        mult_C_equals_ABdagger_for_SU2(bin2,bin1,left);
+        mult_C_equals_ABdagger_for_SU2(bin1,bin2,down);
+
+        S += 1./double(Ncol*nsites*dim*(dim-1))*real(bin1[0]+bin1[3]);        
+    }
+
+    return S;
 }

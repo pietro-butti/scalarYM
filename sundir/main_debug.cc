@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
 
     // PARAMETERS  -------------------------
     beta = 6.0;
-    nt = 3;
-    nx = 3;
-    ny = 3;
+    nt = 5;
+    nx = 5;
+    ny = 5;
     mode = 0;
     thermalization_time = 500;               
     reunitarization_period = 5;            
@@ -63,7 +63,6 @@ int main(int argc, char **argv) {
     output_stream << "#       number of measurements = " << how_many_measurements << endl;
     output_stream << "# updates between measurements = " << updates_between_measurements << endl;
     output_stream << "#                   start type = " << type_of_start << " ";
-        output_stream << "(random start)";
 
     output_stream << endl;
     output_stream << "# ======================================================================\n";
@@ -71,6 +70,7 @@ int main(int argc, char **argv) {
 // ================================================================================ //
 
   initialize();
+
   /*
   for(int mu=0;  mu<dim ; mu++)
   for(int t=0 ; t<nt; t++ )
@@ -81,59 +81,45 @@ int main(int argc, char **argv) {
   dc * test = get_ufield(site, 2);
   for(int i=0; i<4; i++ ) cout << test[i] << endl; //ufield[i + Ncolsquare*get_link(site, 2)] << endl; 
       cout << t << " "<< x <<" "<< y << " " << mu << " "<< get_site(t,x,y) <<  " " << get_link(get_site(t,x,y), mu) << endl;
-    }
-  */
-
-  //get_plaq_index(5, 2,1);
-  cout << get_wilson_action() << endl;
-  cout << plaquette() << endl;
-<<<<<<< HEAD
-  //cout << plaquette() << endl;
-=======
->>>>>>> origin/alessandro
-
-
-
- /*
-  ofstream out;
-  out.open("prova.dat");
-
-  int Nsweep = 100000;
-  int counter = 0;
-  for(int tt=0; tt<Nsweep; tt++) {    
-<<<<<<< HEAD
-    if (Metropolis_sweep_gauge(.005)==true) counter++;
-    
-
-    // for (unsigned short int hb_counter=0;hb_counter<how_many_hb;hb_counter++) {  
-    //     heat_bath(0);
-    // // gauge_transform();
-    //     for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) { 
-    //     overrelaxation(0);
-    // // gauge_transform();
-    //     }
-    // }
-
-
-    if (tt%reunitarization_period==0) reunitarize();
-    
-=======
-    if (Metropolis_sweep_gauge(0.01)==true) counter++;
->>>>>>> origin/alessandro
-    out << plaquette() << endl;
-    cout << plaquette() << endl;
   }
 
-  out.close();
+  //get_plaq_index(5, 2,1);
+  // cout << get_wilson_action() << endl;
+  // cout << plaquette() << endl;
+  // cout << plaquette() << "   "  << 2.*get_wilson_action() << "  " << " " << plaquette() << endl;
 
+  */
+
+
+
+  ofstream out;
+  out.open("prova.dat");
+  int Nsweep = 10000;
+
+  // int counter = 0;
+  for(int tt=0; tt<Nsweep; tt++) {    
+    // if (Metropolis_sweep_gauge(0.01)==true) counter++;
+
+    // /*
+        for (unsigned short int hb_counter=0;hb_counter<how_many_hb;hb_counter++) { 
+          heat_bath(0);
+          for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) overrelaxation(0);
+        }
+    // */
+
+    if (tt%reunitarization_period==0) reunitarize();
+    out << plaquette() << endl;
+    cout << tt << " " << plaquette() << endl;
+    }
+    
+
+
+  out.close();
   cout << "acceptance rate: " << int(100*float(counter)/float(Nsweep)) << " %" << endl;
 
 
 
-
-
-    deallocate_arrays();
-*/
+  deallocate_arrays();
 
 
 
