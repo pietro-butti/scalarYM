@@ -1,10 +1,4 @@
 
- 
-
-    
-
-
-dc pauli = dc(1.,1.);
 
 
 
@@ -53,13 +47,6 @@ void compute_forces( double* force_comp){
 
 }
 
-/*
-void 
-
-void compute_forces(double* force_comp) {
-    cout << pauli << endl;
-
-}
 
 
 
@@ -106,4 +93,4 @@ void leap_P(double epsilon, dc* P) {
 
     delete[] forces;
     return;
-}S
+}
