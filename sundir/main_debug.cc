@@ -70,36 +70,9 @@ int main(int argc, char **argv) {
 // ================================================================================ //
 
   initialize();
-<<<<<<< HEAD
-  
-  double* force = new double[nsites*dim*3];
-  compute_forces(force);
-  for(int i=0; i<nsites*dim*3; i++) cout << force[i] << endl;
-  
-  /*
-  for(int mu=0;  mu<dim ; mu++)
-  for(int t=0 ; t<nt; t++ )
-  for(int x=0 ; x<nx; x++ )
-  for(int y=0 ; y<ny; y++ ){
-  int site = xx.randInt(nsites);
-
-  dc * test = get_ufield(site, 2);
-  for(int i=0; i<4; i++ ) cout << test[i] << endl; //ufield[i + Ncolsquare*get_link(site, 2)] << endl; 
-      cout << t << " "<< x <<" "<< y << " " << mu << " "<< get_site(t,x,y) <<  " " << get_link(get_site(t,x,y), mu) << endl;
-  }
-
-
-*/
-  // testing get_wilson_action() and comparisone with plaquette()
-
-  //cout << get_wilson_action() << endl;
-  //cout << beta * nsites*6 *(1- plaquette()) << endl;
-  //cout << plaquette() << endl;
-=======
 
 
 
->>>>>>> origin/master
 
   ofstream out;
   out.open("../prova.dat");
