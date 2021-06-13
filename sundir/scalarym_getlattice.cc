@@ -6,10 +6,14 @@ int get_link_index(int site, int mu ){
     return mu*nsites + site;
 }
 
+/* Given a link index, get_ufield stores in *res
+the value of the associated gauge field */
 void get_ufield(int link, dc* res){
     for(int i=0; i<Ncolsquare; i++ ) res[i] = ufield[link*Ncolsquare +i];
 }
 
+/* Given a site and two directions, 
+this function stores in *res the plaquette indeces*/
 void get_plaq_index(int site, int mu, int nu, int* res){
     res[0] = get_link_index(site, mu);
     res[1] = get_link_index(neighbor_plus[mu*nsites + site], nu);
@@ -19,7 +23,7 @@ void get_plaq_index(int site, int mu, int nu, int* res){
 
 double get_wilson_action(){
 
-    double action = 0.;
+    double action = 0.;    
     for(int site=0; site<nsites; site++)
     for(int nu=0; nu<dim; nu++)
     for(int mu=0; mu<nu; mu++){
@@ -68,6 +72,11 @@ double get_plaquette(){
 
         S += 1./double(Ncol*nsites*dim*(dim-1))*real(bin1[0]+bin1[3]);        
     }
+<<<<<<< HEAD
 
     return S;
+=======
+    
+    return  2 * action/double((Ncol*dim*(dim-1.)*nsites));
+>>>>>>> origin/alessandro
 }
