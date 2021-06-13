@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     reunitarization_period = 5;            
     how_many_measurements = 100;
     updates_between_measurements = 1;
-    type_of_start = 0;
+    type_of_start = 1;
 
     // derived variables
     nsites=nt*nx*ny;
@@ -71,6 +71,12 @@ int main(int argc, char **argv) {
 // ================================================================================ //
 
   initialize();
+  int dim_mom_comp = (Ncolsquare-1)*nsites*dim;
+  double* mom_comp = new double[dim_mom_comp];  
+  cout << dim_mom_comp << endl;
+  refresh_mom( mom_comp);
+  
+
   /*
   for(int mu=0;  mu<dim ; mu++)
   for(int t=0 ; t<nt; t++ )
@@ -84,11 +90,13 @@ int main(int argc, char **argv) {
     }
   */
 
-  //get_plaq_index(5, 2,1);
+
+  // testing get_wilson_action() and comparisone with plaquette()
+  /*
   cout << get_wilson_action() << endl;
+  cout << beta * nsites*6 *(1- plaquette()) << endl;
   cout << plaquette() << endl;
-
-
+*/
 
  /*
   ofstream out;
@@ -110,8 +118,8 @@ int main(int argc, char **argv) {
 
 
 
+  */
     deallocate_arrays();
-*/
 
 
 
