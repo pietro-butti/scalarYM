@@ -71,56 +71,38 @@ int main(int argc, char **argv) {
 
   initialize();
 
-  double* force = new double[nsites*dim*3];
-  compute_forces(force);
-  for(int i=0; i<nsites*dim*3; i++) cout << force[i] << endl;
-
-  /*
-  for(int mu=0;  mu<dim ; mu++)
-  for(int t=0 ; t<nt; t++ )
-  for(int x=0 ; x<nx; x++ )
-  for(int y=0 ; y<ny; y++ ){
-  int site = xx.randInt(nsites);
-
-  dc * test = get_ufield(site, 2);
-  for(int i=0; i<4; i++ ) cout << test[i] << endl; //ufield[i + Ncolsquare*get_link(site, 2)] << endl; 
-      cout << t << " "<< x <<" "<< y << " " << mu << " "<< get_site(t,x,y) <<  " " << get_link(get_site(t,x,y), mu) << endl;
-  }
 
 
-  // testing get_wilson_action() and comparisone with plaquette()
 
-  cout << get_wilson_action() << endl;
-  cout << beta * nsites*6 *(1- plaquette()) << endl;
-  cout << plaquette() << endl;
-*/
-
-/*
   ofstream out;
-  out.open("prova.dat");
-  int Nsweep = 10000;
+  out.open("../prova.dat");
+  int Nsweep = 10;
 
   // int counter = 0;
   for(int tt=0; tt<Nsweep; tt++) {    
+    out << get_plaquette() << endl;
+    cout << tt << " " << get_plaquette() << endl;
+
+
     // if (Metropolis_sweep_gauge(0.01)==true) counter++;
 
 
-        // for (unsigned short int hb_counter=0;hb_counter<how_many_hb;hb_counter++) { 
-        //   heat_bath(0);
-        //   for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) overrelaxation(0);
-        // }
+    // for (unsigned short int hb_counter=0;hb_counter<how_many_hb;hb_counter++) { 
+    //   heat_bath(0);
+    //   for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) overrelaxation(0);
+    // }
 
+    if (jump_HMC(.05,2.)==true) counter++;
 
-    if (tt%reunitarization_period==0) reunitarize();
-    out << plaquette() << endl;
-    cout << tt << " " << plaquette() << endl;
-    }
-    
-
-
+    if (tt%reunitarization_period==0) reunitarize();  
+  }
   out.close();
   cout << "acceptance rate: " << int(100*float(counter)/float(Nsweep)) << " %" << endl;
-*/
+
+
+
+
+
 
     deallocate_arrays();
 

@@ -1,5 +1,11 @@
+// THIS IS TO USE HMC FOR GAUGE FIELDS
+double get_Hamiltonian(double* P) {
+    double H = get_wilson_action();
 
+    for(int i=0; i<(nsites*dim*(Ncolsquare-1)); i++) H += .5*P[i]*P[i]; 
 
+    return H;
+}
 
 
 // This generates gaussian distributed momenta
@@ -10,17 +16,13 @@ void refresh_mom(double * mom_comp ){
     }
 }
 
-//double* force_comp = new double[];
-
-void compute_forces( double* force_comp){
-    
+void compute_forces( double* force_comp){    
     dc aux_pauli[Ncolsquare], aux1[Ncolsquare], U[Ncolsquare], staplesum[Ncolsquare],  aux_staple[Ncolsquare];
     //Initialize bins
     
     for(int n=0; n<nsites; n++)
     for(int mu=0; mu<dim; mu++)
     for(int a=0; a<(Ncolsquare-1); a++){
-
         // set staplesum to zero
         for(int i=0; i<Ncolsquare; i++) staplesum[i] = dc(0.,0.);
         
@@ -34,7 +36,7 @@ void compute_forces( double* force_comp){
         }
 
         // get pauli and gauge fields of interest
-        for(int i=0; i<Ncolsquare; i++) aux_pauli[i] = pauli[a*Ncolsquare + i]; 
+        for(int i=0; i<Ncolsquare; i++) aux_pauli[i] = .5*pauli[a*Ncolsquare + i]; 
         for(int i=0; i<Ncolsquare; i++) U[i] = ufield[(mu*nsites+n)*Ncolsquare +i]; 
 
         // multiply pauli*gauge*sumstaple
@@ -42,12 +44,10 @@ void compute_forces( double* force_comp){
         mult_C_equals_AB_for_SU2(aux_staple, aux1, staplesum); 
         
         force_comp[(mu*nsites + n)*(Ncolsquare-1)+a] = beta / float(Ncol) * imag(aux_staple[0] + aux_staple[3]);
-
     }
 
+    return;
 }
-
-
 
 
 // This calculates I_U(epsilon)
@@ -81,7 +81,7 @@ void leap_U(double epsilon, dc* U, double* P) {
     return;
 }
 
-void leap_P(double epsilon, dc* P) {
+void leap_P(double epsilon, double* P) {
     double* forces = new double[(Ncolsquare-1)*nsites*dim];
     compute_forces(forces);
 
@@ -93,4 +93,47 @@ void leap_P(double epsilon, dc* P) {
 
     delete[] forces;
     return;
+}
+
+
+
+bool jump_HMC(double epsilon, double tau) {
+
+    int Njump = int(tau/epsilon);
+
+    // Copy field configurations and initialize momenta
+    dc* ufield_old = new dc[ufielddimension];
+    for(int i=0; i<ufielddimension; i++) ufield_old[i] = ufield[i];
+
+    double* momenta = new double[nsites*dim*(Ncolsquare-1)];
+    refresh_mom(momenta);
+
+
+    double deltaH = -get_Hamiltonian(momenta);
+
+
+    for(int jump=0; jump<Njump; jump++) {
+        leap_P(.5*epsilon,momenta);
+        leap_U(epsilon,ufield,momenta);
+        leap_P(.5*epsilon,momenta);
+    }
+
+
+    // METROPOLIS COINFLIP
+    deltaH += get_Hamiltonian(momenta);
+
+    bool coin = boltzmann_coin_flip(deltaH);
+    delete[] momenta;
+
+
+    if (coin==false) {
+        for(int i=0; i<ufielddimension; i++) ufield[i] = ufield_old[i];
+        cout << "Reject\n";
+        return false;
+    }
+    else {
+        cout << "         Accept\n";
+        return true;
+    }
+
 }

@@ -17,10 +17,7 @@ void update(bool locked_mode) {
 #endif
 */
 
-<<<<<<< HEAD
-=======
 
 	// METROPOLIS UPDATE. Look into metropolis_scalarym.cc
 
->>>>>>> origin/pietro
 }
