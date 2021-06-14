@@ -10,10 +10,29 @@ double get_Hamiltonian(double* P) {
 
 // This generates gaussian distributed momenta
 void refresh_mom(double * mom_comp ){
-    int dim_mom_comp = (Ncolsquare-1)*nsites*dim;
-    for(int i=0; i<dim_mom_comp; i++ ){ 
-        mom_comp[i] = xx.randNorm(0,1);
+    // int dim_mom_comp = (Ncolsquare-1)*nsites*dim;
+    double sigma = .5;
+
+    for(int site=0; site<nsites; site++)
+    for(int mu=0; mu<dim; mu++) {
+        double p1 = xx.randNorm(0,sigma);
+        double p2 = xx.randNorm(0,sigma);
+        double p3 = xx.randNorm(0,sigma);
+        double norm = sqrt(p1*p1 + p2*p2 + p3*p3);
+        p1 /= norm;
+        p2 /= norm;
+        p3 /= norm;
+
+        mom_comp[(mu*nsites+site)*(Ncolsquare-1)] = p1;
+        mom_comp[(mu*nsites+site)*(Ncolsquare-1)+1] = p2;
+        mom_comp[(mu*nsites+site)*(Ncolsquare-1)+2] = p3;
     }
+
+    // for(int i=0; i<dim_mom_comp; i++ ){ 
+    //     mom_comp[i] = xx.randNorm(0,1);
+    // }
+
+    return;
 }
 
 void compute_forces( double* force_comp){    
@@ -65,19 +84,26 @@ void leap_U(double epsilon, dc* U, double* P) {
 
         dc expP[4];
         expP[0] = dc(C,S*P3);
-        expP[1] = dc(P2,P1)*S;
-        expP[2] = dc(-P2,P1)*S;
+        expP[1] = dc(-P2,P1)*S;
+        expP[2] = dc(P2,P1)*S;
         expP[3] = dc(C,-S*P3);
+
+
 
         // Produce candidates U' = expP*U
         dc uold[4], uprime[4];
         for (int i=0; i<Ncolsquare; i++) uold[i] = U[(mu*nsites+site)*Ncolsquare+i];
+        // norm_su2(expP);
+
+
         mult_C_equals_AB_for_SU2(uprime,expP,uold);
+
 
         // Update leaped U
         for (int i=0; i<Ncolsquare; i++) U[(mu*nsites+site)*Ncolsquare+i] = uprime[i];
-    }
 
+
+    }
     return;
 }
 
@@ -110,6 +136,7 @@ bool jump_HMC(double epsilon, double tau) {
 
 
     double deltaH = -get_Hamiltonian(momenta);
+    double deltaS = -get_wilson_action();
 
 
     for(int jump=0; jump<Njump; jump++) {
@@ -121,6 +148,9 @@ bool jump_HMC(double epsilon, double tau) {
 
     // METROPOLIS COINFLIP
     deltaH += get_Hamiltonian(momenta);
+    deltaS += get_wilson_action();
+
+    cout << deltaS << ' ' << deltaH-deltaS << "   " << exp(-deltaH) << "   ";// << endl;
 
     bool coin = boltzmann_coin_flip(deltaH);
     delete[] momenta;

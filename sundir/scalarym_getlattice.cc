@@ -48,7 +48,7 @@ double get_wilson_action(){
         action += 1. - 1./2. * real(aux1[0] + aux1[3]); 
         // action += 2./double(Ncol*nsites*dim*(dim-1))*real(aux1[0] + aux1[3]);
     }
-    return 2.*action*beta;
+    return action*beta;
 }
 
 

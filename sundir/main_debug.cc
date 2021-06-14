@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
 
     // PARAMETERS  -------------------------
     beta = 6.0;
-    nt = 5;
-    nx = 5;
-    ny = 5;
+    nt = 2;
+    nx = 2;
+    ny = 2;
     mode = 0;
     thermalization_time = 500;               
     reunitarization_period = 5;            
@@ -72,16 +72,14 @@ int main(int argc, char **argv) {
   initialize();
 
 
-
-
   ofstream out;
   out.open("../prova.dat");
-  int Nsweep = 10;
+  int Nsweep = 1000;
 
   // int counter = 0;
   for(int tt=0; tt<Nsweep; tt++) {    
     out << get_plaquette() << endl;
-    cout << tt << " " << get_plaquette() << endl;
+    // cout << tt << " " << get_plaquette() << endl;
 
 
     // if (Metropolis_sweep_gauge(0.01)==true) counter++;
@@ -92,7 +90,31 @@ int main(int argc, char **argv) {
     //   for (unsigned short int or_counter=0;or_counter<how_many_or;or_counter++) overrelaxation(0);
     // }
 
-    if (jump_HMC(.05,2.)==true) counter++;
+    if (jump_HMC(.001,.1)==true) counter++;
+
+
+
+
+/*
+  // -----------------------------------------------------------------
+    double tau=2.; double epsilon=.1;
+    int Njump = int(tau/epsilon);
+
+    double* momenta = new double[nsites*dim*(Ncolsquare-1)];
+    refresh_mom(momenta);
+
+    // for(int i=0; i<ufielddimension; i++) cout << ufield[i] << "        ";
+    // cout << endl;
+
+
+    for(int jump=0; jump<Njump; jump++) {
+        leap_P(.5*epsilon,momenta);
+        leap_U(epsilon,ufield,momenta);
+        leap_P(.5*epsilon,momenta);
+    }
+
+  // -----------------------------------------------------------------------
+*/
 
     if (tt%reunitarization_period==0) reunitarize();  
   }

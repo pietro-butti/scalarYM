@@ -1,19 +1,28 @@
 	//true--->accept, false---reject
 bool boltzmann_coin_flip(double deltaS) { 
-	double coin = xx.rand();
-	double probability = min(1.,exp(-deltaS));
+	double coin = xx.randExc();
 
-	if (coin<probability) return true;
+
+
+	// double probability = min(1.,exp(-deltaS));
+	// if (coin<probability) return true;
+	// else return false;
+	
+
+
+
+
+
+	// if (deltaS<0) return true;
+	// else{
+	// 	double coin = xx.rand();
+	// 	if (coin<exp(-deltaS)) return true;
+	// 	else return false;
+	// }
+
+
+	if(coin<=exp(-deltaS)) return true;
 	else return false;
-	/*
-	if (deltaS<0) return true;
-	else{
-		double coin = xx.rand();
-
-		if (coin<exp(-deltaS)) return true;
-		else return false;
-	}
-	*/
 }
 
 
